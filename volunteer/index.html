@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Make your I'm volunteering pass for the Claude Code Workshop at BIBA Indrapuri, Bhopal.">
-<meta property="og:title" content="I'm volunteering · Claude Code Workshop, Bhopal"><meta property="og:description" content="Make your pass and post it. Thu 15 Oct, 1:30–4:30 PM, BIBA Indrapuri, Bhopal.">
+<meta name="description" content="Make your I'm volunteering pass for the Claude Code Workshop at Sheryians, near BIBA Indrapuri, Bhopal.">
+<meta property="og:title" content="I'm volunteering · Claude Code Workshop, Bhopal"><meta property="og:description" content="Make your pass and post it. Thu 15 Oct, 1:30–4:30 PM, Sheryians (3rd floor), near BIBA Indrapuri, Bhopal.">
 <style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Claude Code Workshop Volunteer Pass</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,7 +132,7 @@ const block=(lab,big,sub)=>{x.fillStyle=T.mute;x.font=`700 20px ${F.mono}`;space
 x.fillStyle=T.fg;x.font=`400 84px ${F.anton}`;x.fillText(big,rx,ry+86);
 x.font=`italic 400 36px ${F.serif}`;x.fillText(sub,rx,ry+130);ry+=190};
 block('THU · 1:30–4:30 PM','15 OCT','Hands-on workshop');
-block('VENUE · 3RD FLOOR','BIBA','Indrapuri, Bhopal');
+block('VENUE · 3RD FLOOR','SHERYIANS','Near BIBA Indrapuri');
 x.textBaseline='alphabetic';x.textAlign='left';
 // name / role / tags
 const name=($('name').value.trim()||'Your Name');
@@ -149,7 +149,7 @@ if(img.clawd.complete&&st.style!=='terra')x.drawImage(img.clawd,W-200,1066,150,9
 // bottom band
 x.fillStyle=T.band;x.fillRect(0,1250,W,100);
 x.fillStyle=T.bandfg;x.font=`400 40px ${F.anton}`;x.fillText('CLAUDE CODE WORKSHOP · BHOPAL',70,1300);
-x.font=`700 18px ${F.mono}`;spaced('BIBA INDRAPURI · REGISTER: LUMA.COM/CLAUDE-3BRG',70,1330,2.4);
+x.font=`700 18px ${F.mono}`;spaced('SHERYIANS, NEAR BIBA INDRAPURI · LUMA.COM/CLAUDE-3BRG',70,1330,2.4);
 // QR (29 modules + border = 31, drawn at 4px/module so it stays crisp)
 x.fillStyle='#fff';rr(W-200,1150,150,150,16);x.fill();x.strokeStyle=T.band;x.lineWidth=4;x.stroke();
 if(img.qr.complete){x.imageSmoothingEnabled=false;x.drawImage(img.qr,W-200+13,1163,124,124);x.imageSmoothingEnabled=true}
@@ -180,7 +180,7 @@ cv.addEventListener('pointermove',e=>{if(!drag)return;const k=W/cv.getBoundingCl
 document.querySelectorAll('#style button').forEach(b=>b.onclick=()=>{st.style=b.dataset.v;document.querySelectorAll('#style button').forEach(o=>o.setAttribute('aria-pressed',o===b));draw()});
 // caption
 $('caption').value=`Volunteering at the Claude Code Workshop in Bhopal!
-Thu 15 Oct, 1:30–4:30 PM at BIBA Indrapuri.
+Thu 15 Oct, 1:30–4:30 PM at Sheryians (3rd floor), near BIBA Indrapuri.
 First a tour of the Claude ecosystem (Claude.ai, Claude Code, the Anthropic API and MCP), then we build a small project live with Claude Code.
 Building in Bhopal? Grab a spot: https://luma.com/claude-3brg
 #ClaudeBhopal`;
