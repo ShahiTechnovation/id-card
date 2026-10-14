@@ -1,76 +1,50 @@
-# TOG Attendee Pass ("I'm attending" generator)
+# Claude Code Workshop Pass ("I'm attending" generator)
 
-Lets approved attendees of Claude Impact Lab × Cerebras Community (10–11 Oct, Global Skills Park, Bhopal) make a 1080×1350 LinkedIn pass.
+Lets attendees of the Claude Code Workshop (Thu 15 Oct, 1:30–4:30 PM, BIBA Indrapuri, Bhopal · https://luma.com/claude-3brg) make a 1080×1350 LinkedIn pass.
 They upload a photo, enter name / role / 3 tags, pick a style (Cream / Terracotta / After dark), download a PNG and copy a ready-made caption.
 
-- Single static file: `index.html` (~64 KB). No build step and no backend. All logos, mascots and the Luma QR are embedded as data URIs.
+- One static HTML file per pass (~29 KB). No build step and no backend. The Claude logo, the Clawd mascot and the Luma QR are embedded as data URIs.
 - Photos never leave the user's device; everything is drawn on a `<canvas>`.
 - Fonts load from Google Fonts: Anton, Bricolage Grotesque, Instrument Serif and JetBrains Mono.
 
 ## Files
 ```
-tog-pass/
-├── index.html          ← the whole site (deploy this)
-├── README.md
-└── worker/             ← only for the Cloudflare Workers option
-    ├── worker.js       ← same page, served by a Worker
-    └── wrangler.toml   ← name = "theoriginguild"
+index.html               ← attendee pass ("I'm attending"), the one served at flex.withclaude.in
+host/index.html          ← "I'm hosting" pass
+volunteer/index.html     ← "I'm volunteering" pass
+tog-pass/, tog-pass.zip  ← archive of the 10–11 Oct Claude Impact Lab × Cerebras pass
 ```
+`host/` and `volunteer/` are the attendee page with the headline, caption and download name swapped. If you change `index.html`, make the same change in both.
 
-## Deploy (pick one)
-
-### A. Cloudflare Pages (no install, about 1 minute)
-1. dash.cloudflare.com → Workers & Pages → Create → Pages → **Upload assets**
-2. Project name: `theoriginguild` → drag in the `tog-pass` folder → Deploy
-3. URL: **https://theoriginguild.pages.dev**
-
-### B. Cloudflare Workers (CLI)
+## Deploy
+The live site runs on Vercel and was deployed from the CLI, not from GitHub, so pushing to this repo does not update it. From the repo root:
 ```bash
-cd tog-pass/worker
-npx wrangler login
-npx wrangler deploy
+npx vercel --prod      # first run asks which project to link: pick the one that owns flex.withclaude.in
 ```
-URL: `https://theoriginguild.<your-subdomain>.workers.dev`
+`host/` and `volunteer/` have their own `vercel.json`, so run the same command inside each folder if you want those live too.
 
-Or use the dashboard: Create Worker → name it `theoriginguild` → Edit code → paste the contents of `worker.js` → Deploy.
-
-### C. Vercel
-```bash
-cd tog-pass
-npx vercel --prod      # project name: theoriginguild
-```
-URL: `https://theoriginguild.vercel.app` (if the name is free)
-
-### D. Netlify
-Go to app.netlify.com/drop and drag in the `tog-pass` folder. Then Site settings → change the site name to `theoriginguild`.
-
-### E. GitHub Pages
-Push `index.html` to a repo, for example `vishal4742/attendee-pass`. Then Settings → Pages → Deploy from branch `main`.
-
-### Custom domain (optional)
-On Cloudflare Pages: project → Custom domains → add e.g. `pass.theoriginguild.com`.
+Any static host also works (Cloudflare Pages upload, Netlify drop): upload the folder.
 
 ## Where to edit things (search inside index.html)
 | What | Search for |
 |---|---|
 | LinkedIn caption text | `$('caption').value=` |
 | Card styles / colours | `const THEMES=` (cream, terra, ink) |
-| Dates, timings, "$100 Claude credits" | `day('DAY 1` and `$100 CLAUDE CREDITS` |
-| Bottom band text / Luma link | `CLAUDE IMPACT LAB × CEREBRAS` and `REGISTER: LUMA.COM` |
-| Page headline | `Got approved?` |
-| Images (logos, mascots, QR) | `const A={` (base64 data URIs: tog, claude, cerebras, clawd, frog, qr) |
-| Download filename | `TOG-ImpactLab-` |
+| Date, time, venue | `block('THU` and `block('VENUE` |
+| Top bar text | `CLAUDE COMMUNITY` and `BHOPAL · 15 OCT` |
+| Bottom band text / Luma link | `CLAUDE CODE WORKSHOP · BHOPAL` and `REGISTER: LUMA.COM` |
+| Page headline | `Got your spot?` |
+| Images (logo, mascot, QR) | `const A={` (base64 data URIs: claude, clawd, qr) |
+| Download filename | `Claude-Code-Workshop-` |
 
-If you edit `index.html` and also use the Worker option, regenerate `worker.js`:
-```bash
-node -e "const fs=require('fs');const h=fs.readFileSync('index.html','utf8');fs.writeFileSync('worker/worker.js','const HTML='+JSON.stringify(h)+';\nexport default{async fetch(){return new Response(HTML,{headers:{\"content-type\":\"text/html;charset=utf-8\",\"cache-control\":\"public,max-age=300\"}})}};\n')"
-```
+The QR is drawn at 4 px per module (31 modules × 4 = 124 px) so it stays sharp. If a new link gives a QR with a different module count, update the size on the `// QR` line.
 
 ## Share flow
 1. Add the live link to the Luma approval message: "You're in. Make your pass and post it: <link>"
-2. Send one Luma blast to everyone already approved, and post the link in the WhatsApp group with your own pass as an example.
-3. The caption includes #ClaudeBhopal and asks people to tag The Origin Guild. Reshare the best posts from the TOG page.
+2. Send one Luma blast to everyone approved, and post the link in the Claude Community WhatsApp group with your own pass as an example.
+3. The caption includes #ClaudeBhopal and asks people to tag Aniket Sahu and Claude. Reshare the best posts.
 
 ## Rules baked in
-- Logos are used exactly as provided. The connector is "×". The word "partnership" is never used.
-- QR → https://luma.com/claude-ozni (verified).
+- Logos are used exactly as provided.
+- The pass only says what the Luma page says: no credits, no prizes.
+- QR → https://luma.com/claude-3brg (checked by scanning the rendered pass).
