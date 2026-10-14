@@ -1,6 +1,6 @@
 # Claude Code Workshop Pass ("I'm attending" generator)
 
-Lets attendees of the Claude Code Workshop (Thu 15 Oct, 1:30–4:30 PM, BIBA Indrapuri, Bhopal · https://luma.com/claude-3brg) make a 1080×1350 LinkedIn pass.
+Lets attendees of the Claude Code Workshop (Thu 15 Oct, 1:30–4:30 PM, Sheryians (3rd floor), near BIBA Indrapuri, Bhopal · https://luma.com/claude-3brg) make a 1080×1350 LinkedIn pass.
 They upload a photo, enter name / role / 3 tags, pick a style (Cream / Terracotta / After dark), download a PNG and copy a ready-made caption.
 
 - One static HTML file per pass (~29 KB). No build step and no backend. The Claude logo, the Clawd mascot and the Luma QR are embedded as data URIs.
